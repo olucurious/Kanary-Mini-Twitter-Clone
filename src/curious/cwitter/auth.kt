@@ -21,6 +21,7 @@ class AuthController : KanaryController() {
         response?.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE")
         response?.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Authorization")
         response?.setHeader("Access-Control-Allow-Credentials", "true")
+        db.init()
     }
 
     fun opt(baseRequest: Request, request: HttpServletRequest, response: HttpServletResponse) {

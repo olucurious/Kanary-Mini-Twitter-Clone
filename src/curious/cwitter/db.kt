@@ -69,7 +69,7 @@ class DataHandler {
 
     fun init(): Unit {
         session.run(queryOf("""
-              CREATE TABLE users (
+              CREATE TABLE IF NOT EXISTS users (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     first_name CHAR NOT NULL,
                     last_name CHAR NOT NULL,
@@ -80,7 +80,7 @@ class DataHandler {
                 )
             """).asExecute)
         session.run(queryOf("""
-              CREATE TABLE cweets (
+              CREATE TABLE IF NOT EXISTS cweets (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     text CHAR NOT NULL,
                     creator_id INTEGER NOT NULL,
