@@ -111,14 +111,25 @@ class DataHandler {
     }
 
     fun registerUser(first_name: String, last_name: String, email: String, hpword: String): User? {
-        val insertQuery: String = "insert into users (first_name, last_name, email, pword, created_at) values (?, ?, ?, ?, ?)"
-        session.run(queryOf(insertQuery, first_name, last_name, email, hpword, java.time.ZonedDateTime.now()).asUpdate)
-        return fetchUser(email, hpword)
+        var user: User? = null
+        try {
+            val insertQuery: String = "insert into users (first_name, last_name, email, pword, created_at) values (?, ?, ?, ?, ?)"
+            session.run(queryOf(insertQuery, first_name, last_name, email, hpword, java.time.ZonedDateTime.now()).asUpdate)
+            user = fetchUser(email, hpword)
+        } catch (e: Exception){
+            e.printStackTrace()
+        }
+        return user
     }
 
     fun fetchUser(email: String, pword: String): User? {
-        val fetchQuery = queryOf("select id, first_name, last_name, email, pword, created_at, session_id from users where email = ? and pword = ?", email, pword).map(toUser).asSingle
-        val user: User? = session.run(fetchQuery)
+        var user: User? = null
+        try {
+            val fetchQuery = queryOf("select id, first_name, last_name, email, pword, created_at, session_id from users where email = ? and pword = ?", email, pword).map(toUser).asSingle
+            user = session.run(fetchQuery)
+        } catch (e: Exception){
+            e.printStackTrace()
+        }
         return user
     }
 
