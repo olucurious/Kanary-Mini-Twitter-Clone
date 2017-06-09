@@ -1,1 +1,1 @@
-web: build/install/Cweet/bin/Cweet
+web: build/install/Kanary-Mini-Twitter-Clone/bin/Kanary-Mini-Twitter-Clone
