@@ -7,4 +7,3 @@ out
 *.iws
 .env
 .DS_Store
-/cweet.db
