@@ -45,6 +45,8 @@ class AuthController : KanaryController() {
             val pword = requestJson?.get("pword")?.asText()
 
             if (db.validateEmail(email!!)){
+                // Like I said, this is just a proof of concept
+                // TODO: Password hashing
                 val user: User? = db.registerUser(first_name!!, last_name!!, email, pword!!)
 
                 if (user != null){

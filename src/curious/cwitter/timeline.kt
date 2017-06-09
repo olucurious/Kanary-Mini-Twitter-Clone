@@ -46,6 +46,10 @@ class TimelineController : KanaryController() {
         }
     }
 
+    override fun afterAction(request: HttpServletRequest, response: HttpServletResponse?) {
+        user = null
+    }
+
     fun createCweet(baseRequest: Request, request: HttpServletRequest, response: HttpServletResponse) {
         // Create json object mapper
         val mapper = ObjectMapper()
@@ -163,8 +167,29 @@ class TimelineController : KanaryController() {
         if (validateJSON(requestJson, fields)){
 
             val user_id = requestJson?.get("user_id")?.asInt()
-
             val cweets = db.getUserCweets(user_id!!)
+
+
+            val currentUserNode = mapper.createObjectNode()
+
+            with(currentUserNode) {
+                put("user_id", user?.id)
+                put("first_name", user?.firstName)
+                put("last_name", user?.lastName)
+                put("email", user?.email)
+            }
+
+            responseRootNode.set("user", currentUserNode)
+
+            if (cweets.isEmpty()){
+                with(responseRootNode) {
+                    put("status", "error")
+                    put("message", "user profile feed not found")
+                }
+                response withStatus 200 sendJson responseRootNode
+                baseRequest.done()
+                return
+            }
 
             val dataNode = mapper.createArrayNode()
             val userNode = mapper.createObjectNode()
@@ -184,14 +209,14 @@ class TimelineController : KanaryController() {
 
             responseRootNode.set("data", dataNode)
 
-            with(userNode) {
-                put("user_id", user?.id)
-                put("first_name", user?.firstName)
-                put("last_name", user?.lastName)
-                put("email", user?.email)
+            if (cweets.isNotEmpty()){
+                with(userNode) {
+                    put("user_id", cweets[0].creatorId)
+                    put("first_name", cweets[0].firstName)
+                    put("last_name", cweets[0].lastName)
+                }
+                responseRootNode.set("profile_user", userNode)
             }
-
-            responseRootNode.set("user", userNode)
 
             with(responseRootNode) {
                 put("status", "success")
@@ -200,7 +225,7 @@ class TimelineController : KanaryController() {
         } else {
             with(responseRootNode) {
                 put("status", "error")
-                put("message", "user id not found")
+                put("message", "user id not found in request")
             }
         }
 
