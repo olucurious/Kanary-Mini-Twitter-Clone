@@ -9,6 +9,7 @@ import javax.servlet.http.Cookie
 fun getOrigin(scheme: String): String {
     // Not really doing anything right now
     // cos request scheme apparently always seem to be http
+    println(scheme)
     val origins = arrayOf("http://cwitter.curious.com.ng", "https://cwitter.curious.com.ng")
     //val origins = arrayOf("", "http://localhost:8000")
     if (scheme == "https"){
