@@ -1,3 +1,13 @@
+build
+.gradle
+.idea
+out
+*.iml
+*.ipr
+*.iws
+.env
+.DS_Store
+
 # Compiled class file
 *.class
 
