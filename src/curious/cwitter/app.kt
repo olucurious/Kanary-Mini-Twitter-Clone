@@ -49,7 +49,7 @@ fun main(args: Array<String>) {
     app.use(requestLogger)
     server.handler = AppHandler(app)
 
-    server.listen(Integer.valueOf(System.getenv("PORT"))) // for Heroku deployment
-    //server.listen(8080) // for local development
+    //server.listen(Integer.valueOf(System.getenv("PORT"))) // for Heroku deployment
+    server.listen(8080) // for local development
 
 }
