@@ -2,6 +2,11 @@
 This is a proof of concept RestAPI written in Kotlin and built with Kanary web framework
 
 
+AngularJS frontend is here: https://github.com/olucurious/cwitter
+
+![alt text](https://github.com/olucurious/Cwitter/raw/master/ScreenShot.png?raw=true "")
+
+
 Quickstart
 ==========
 
@@ -37,8 +42,5 @@ $ heroku create
 $ git push heroku master
 ```
 
-AngularJS frontend is here: https://github.com/olucurious/cwitter
-
-![alt text](https://github.com/olucurious/Cwitter/raw/master/ScreenShot.png?raw=true "")
 
 NOTE: Heroku's storage is ephemeral, so the sqlite db will be wiped out after a while, you should use Heroku postgres or a remote database for more serious stuff
