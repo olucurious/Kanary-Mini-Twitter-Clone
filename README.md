@@ -4,6 +4,8 @@ This is a proof of concept RestAPI written in Kotlin and built with Kanary web f
 
 AngularJS frontend is here: https://github.com/olucurious/cwitter
 
+Live demo: https://cwitter.curious.com.ng
+
 ![alt text](https://github.com/olucurious/Cwitter/raw/master/ScreenShot.png?raw=true "")
 
 
